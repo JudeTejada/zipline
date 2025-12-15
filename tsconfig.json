@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "types": ["bun-types"],
+    "lib": ["ESNext", "DOM"],
+    "noEmit": true
+  },
+  "include": ["src"]
+}
