@@ -21,25 +21,25 @@ shasum -a 256 zipline-* > checksums.txt
 Create a GitHub release with the three binaries and `checksums.txt` attached.
 
 ## Homebrew tap formula
-Create your tap repo (e.g., `your-org/homebrew-tap`) and add a formula file `zipline.rb`:
+Create your tap repo (e.g., `JudeTejada/homebrew-tap`) and add a formula file `zipline.rb`:
 ```ruby
 class Zipline < Formula
   desc "Download GitHub folders as a zip without cloning"
-  homepage "https://github.com/<your-org>/<repo>"
+  homepage "https://github.com/JudeTejada/zipline"
   version "0.1.0"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/<your-org>/<repo>/releases/download/v0.1.0/zipline-macos-arm64"
+      url "https://github.com/JudeTejada/zipline/releases/download/v0.1.0/zipline-macos-arm64"
       sha256 "<ARM64_SHA256>"
     else
-      url "https://github.com/<your-org>/<repo>/releases/download/v0.1.0/zipline-macos-x64"
+      url "https://github.com/JudeTejada/zipline/releases/download/v0.1.0/zipline-macos-x64"
       sha256 "<X64_SHA256>"
     end
   end
 
   on_linux do
-    url "https://github.com/<your-org>/<repo>/releases/download/v0.1.0/zipline-linux-x64"
+    url "https://github.com/JudeTejada/zipline/releases/download/v0.1.0/zipline-linux-x64"
     sha256 "<LINUX_X64_SHA256>"
   end
 
@@ -49,7 +49,7 @@ class Zipline < Formula
 end
 ```
 
-Replace `<your-org>/<repo>` with this repo’s owner/name and the `<SHA256>` placeholders with values from `checksums.txt`.
+Replace `JudeTejada/zipline` with this repo’s owner/name and the `<SHA256>` placeholders with values from `checksums.txt`.
 
 Publish the tap:
 ```bash
@@ -60,7 +60,7 @@ git push origin main
 
 Users install via:
 ```bash
-brew tap <your-org>/tap
+brew tap JudeTejada/tap
 brew install zipline
 ```
 
@@ -68,11 +68,11 @@ brew install zipline
 For environments with Bun available, users can run the CLI directly from GitHub without any installation:
 ```bash
 # Run directly from GitHub (downloads and caches automatically)
-bunx github:<your-org>/<repo> --interactive
+bunx github:JudeTejada/zipline --interactive
 
 # Or with a specific branch/tag
-bunx github:<your-org>/<repo>#main --interactive
-bunx github:<your-org>/<repo>#v0.1.0 --interactive
+bunx github:JudeTejada/zipline#main --interactive
+bunx github:JudeTejada/zipline#v0.1.0 --interactive
 ```
 
 This approach:
@@ -84,8 +84,8 @@ This approach:
 ## Local development install
 For contributors who want to develop locally:
 ```bash
-git clone https://github.com/<your-org>/<repo>.git
-cd <repo>
+git clone https://github.com/JudeTejada/zipline.git
+cd zipline
 bun install
 bun link  # Makes 'zipline' available globally
 ```
@@ -93,4 +93,4 @@ bun link  # Makes 'zipline' available globally
 ## Troubleshooting distribution
 - **Binary won’t run:** Ensure you built with `bun build --compile` on the target architecture. Cross-compile by running the build on the matching OS/arch or using a CI matrix.
 - **SHA mismatch in brew:** Update the formula SHA to match the uploaded asset’s checksum.
-- **Homebrew “No available formula”:** Confirm the tap is tapped (`brew tap <your-org>/tap`) and the formula file is named `zipline.rb`.
+- **Homebrew “No available formula”:** Confirm the tap is tapped (`brew tap JudeTejada/tap`) and the formula file is named `zipline.rb`.
